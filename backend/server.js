@@ -1,20 +1,43 @@
-const os = require('os');
-const add = require('./local-module.js');
-const chalk = require('chalk');
+console.log(__dirname);
+console.log(__filename);
 
-console.log('Operating System Info:', os.platform());
-console.log('free memory', os.freemem());
-console.log('total-value', add(10, 20));
-console.log('external model chalk', chalk.blue('Hello world!'));
-console.log('os type', os.type());
-console.log('os platform',os.platform());
-console.log('os arch', os.arch());
-console.log('os hostnam', os.hostname());
-console.log('os.release', os.release());
-console.log('os uptime', os.uptime());
-console.log('os userinfo', os.userInfo());
-console.log('os.total memory', os.totalmem());
-console.log('os cpus', os.cpus().length);
+const path = require("path");
+const fs = require("fs");
+const url = "/node-project/mern-ecommers/backend/server.js";
+const url1 = "/node-project/mern-ecommers";
+const url2 = "/frontend/src/App.js";
+
+console.log("basename:", path.basename(url));
+console.log("remove extension from base name:", path.basename(url, "js"));
+console.log("dirname:", path.dirname(url));
+console.log("extension:", path.extname(url));
+console.log("join:", path.join(url1, url2));
+console.log("resolve:", path.resolve("user/hello/hi", "component", "index.js"));
+console.log("parse:", path.parse(url));
+
+//real world example
+
+const finalPath = path.join(__dirname, "data", "hello.txt");
+console.log("final path:", finalPath);
+fs.writeFileSync(finalPath, "hello world");
+const data = fs.readFileSync(finalPath, "utf-8");
+console.log("created file data:", data);
+// console.log("create folder:", fs.mkdirSync("data2"));
+// console.log("remove folder:", fs.rmdirSync("data2"));
+//to check whether file exists or not
+if(fs.existsSync('data/hello.txt')){
+    console.log("File exists!");
+}else{
+    console.log("File does not exist!");
+}
+
+
+
+
+
+
+
+
 
 
 
