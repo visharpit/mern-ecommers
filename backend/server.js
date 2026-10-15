@@ -1,23 +1,36 @@
-const os = require('os');
-const add = require('./local-module.js');
-const chalk = require('chalk');
+const EventEmitter = require('events');
+const event = new EventEmitter();
+const dotenv = require('dotenv');
+dotenv.config();
 
-console.log('Operating System Info:', os.platform());
-console.log('free memory', os.freemem());
-console.log('total-value', add(10, 20));
-console.log('external model chalk', chalk.blue('Hello world!'));
-console.log('os type', os.type());
-console.log('os platform',os.platform());
-console.log('os arch', os.arch());
-console.log('os hostnam', os.hostname());
-console.log('os.release', os.release());
-console.log('os uptime', os.uptime());
-console.log('os userinfo', os.userInfo());
-console.log('os.total memory', os.totalmem());
-console.log('os cpus', os.cpus().length);
+event.on('greet', ()=>{
+    console.log('Hello this is an event emitter');
+})
 
 
+event.emit('greet');
 
+// event.on('user', (name, age)=>{
+//     console.log(`Hello ${name}, you are ${age} years old`);
+// })
+event.once('user', (name, age)=>{
+    console.log(`Hello ${name}, you are ${age} years old`);
+})
 
+event.emit('user', 'Arpit', 31);
+event.emit('user', 'Rahul', 20);
+event.emit('user', 'Riya', 29);
 
+function onDataReceived(data){
+    console.log(`Data received: ${data}`);
+}
+event.on('data', onDataReceived);
+event.removeListener('data', onDataReceived);
+event.emit('data', 'This is some data');
+event.emit('data', 'This is my second data');
 
+console.log("process", process.pid);
+
+console.log("process platform", process.platform);
+console.log("process version", process.version);
+console.log("process.log", process.env.MONGO_URI);
