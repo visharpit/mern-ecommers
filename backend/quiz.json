@@ -1,0 +1,27 @@
+{
+  "quizTitle": "Node.js Basics Quiz",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is Node.js?",
+      "options": [
+        "A JavaScript runtime built on Chrome's V8 engine",
+        "A JavaScript framework for frontend design",
+        "A database management system",
+        "A markup language"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "id": 2,
+      "question": "Which module is used to create a web server in Node.js?",
+      "options": [
+        "fs",
+        "http",
+        "path",
+        "url"
+      ],
+      "correctAnswer": 1
+    }
+  ]
+}
