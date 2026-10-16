@@ -1,23 +1,20 @@
-const os = require('os');
-const add = require('./local-module.js');
-const chalk = require('chalk');
+import axios from 'axios';
+import readline from 'readline';
 
-console.log('Operating System Info:', os.platform());
-console.log('free memory', os.freemem());
-console.log('total-value', add(10, 20));
-console.log('external model chalk', chalk.blue('Hello world!'));
-console.log('os type', os.type());
-console.log('os platform',os.platform());
-console.log('os arch', os.arch());
-console.log('os hostnam', os.hostname());
-console.log('os.release', os.release());
-console.log('os uptime', os.uptime());
-console.log('os userinfo', os.userInfo());
-console.log('os.total memory', os.totalmem());
-console.log('os cpus', os.cpus().length);
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
 
+rl.question("enter the city Name: ", async (city) => {
 
-
-
-
-
+    const url = `https://weather/${city}`;
+    try {
+        const result = await axios.get(url);
+        console.log(`weather of ${city} is :`, result.data);
+    } catch (error) {
+        console.log("error", error);
+    } finally{
+        rl.close();
+    }
+})
