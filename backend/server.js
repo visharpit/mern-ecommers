@@ -1,23 +1,56 @@
-const os = require('os');
-const add = require('./local-module.js');
-const chalk = require('chalk');
+// const express = require('express');
+// const path = require('path');
 
-console.log('Operating System Info:', os.platform());
-console.log('free memory', os.freemem());
-console.log('total-value', add(10, 20));
-console.log('external model chalk', chalk.blue('Hello world!'));
-console.log('os type', os.type());
-console.log('os platform',os.platform());
-console.log('os arch', os.arch());
-console.log('os hostnam', os.hostname());
-console.log('os.release', os.release());
-console.log('os uptime', os.uptime());
-console.log('os userinfo', os.userInfo());
-console.log('os.total memory', os.totalmem());
-console.log('os cpus', os.cpus().length);
+// const app = express();
+// app.use(express.static(path.resolve('public')))
 
+// app.get('/', (req, res)=>{
+//     res.sendFile(path.resolve('index.html'))
+// })
+// app.listen(3000, ()=>{
+//     console.log("server is running on port 3000")
+// })
 
+// import mongoose from 'mongoose'
 
+// const dbConnection = async() =>{
+//     try{
+//         await mongoose.connect('mongodb://localhost:27017/studentDB')
+//         console.log("Database successfully connected")
+//     }catch(error){
+//         console.log('error', error)
+//     }
+// }
+// dbConnection();
 
+// const studentSchema = new mongoose.Schema({
+//     name: String,
+//     age: Number
+// },{collection: 'student'});
 
+// const studentModel = mongoose.model("student", studentSchema)
 
+// const getStudents = async()=>{
+//     try{
+//         const students = await studentModel.find({})
+//         console.log("students", students);
+//     }catch(error){
+//         console.log("error", error)
+//     }
+// }
+
+// getStudents();
+import express from 'express';
+import router from "./userRoutes.js"
+import dbConnection from "./config/db.js"
+
+const app = express();
+app.use(express.json());
+dbConnection();
+app.get('/', router)
+app.post('/users', router)
+app.put('/users/:id', router)
+app.delete('/deleteUser/:id', router)
+app.listen(3000, ()=>{
+    console.log('server is connected to 3000 port');
+})
